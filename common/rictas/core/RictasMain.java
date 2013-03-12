@@ -55,7 +55,7 @@ public class RictasMain {
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		
+		//test
 	}
 
 	@Init
