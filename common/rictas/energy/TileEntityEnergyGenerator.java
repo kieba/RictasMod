@@ -29,6 +29,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 	private static int textureSideInActive = 3 + 16*4;
 	private static int textureOutput = 4 + 16*4;
 	private static int defaultMaxOutput = 15;
+	private static int defaultProdutcionSpeed = 10;
     /*
     [0] = DOWN(0, -1, 0), 
     [1] = UP(0, 1, 0),
@@ -40,6 +41,9 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 	private int remainingBurnTime;
 	private int currentItemBurnTime;
 	private ItemStack[] inv = new ItemStack[5];
+	
+	private int productionSpeedBonus = 0; // if 10 => double production
+	private int count = 0;
 	
 	private boolean hasOutputControl;
 	private boolean hasSideControl;
@@ -56,6 +60,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 		if(!this.isNbtLoaded()) {
 			for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
 		}
+		this.onInventoryChanged();
 	}
 	
 	/*
@@ -149,8 +154,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 	}
 	
 	public int getProductionSpeed() {
-		//TODO: implement upgrade to increase this number
-		return 10;
+		return defaultProdutcionSpeed + productionSpeedBonus;
 	}
 
 	public int getMaxStorage() {
@@ -166,7 +170,13 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
         if (this.remainingBurnTime > 0 && storage<maxStorage)
         {
             --this.remainingBurnTime;
-            	storage += 10;
+            storage += 3;
+            count += productionSpeedBonus;
+            while(count >= 10) {
+            	count -= 10;
+            	--this.remainingBurnTime;
+            	storage += 3;
+            }
         }
         if (!this.worldObj.isRemote)
         {
@@ -175,6 +185,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
                 this.currentItemBurnTime = this.remainingBurnTime = TileEntityFurnace.getItemBurnTime(inv[0]);
                 if (this.remainingBurnTime > 0)
                 {
+                	this.remainingBurnTime++;
                 	updateClient = true;
                     if (this.inv[0] != null)
                     {
@@ -319,6 +330,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 		hasPrioControl = false;
 		hasSideControl = false;
 		int increaseUpgrades = 0;
+		int productionSpeedUpgrades = 0;
 		for(int i = 1; i < 5; i++)  {
 			if(inv[i] != null && inv[i].getItem() instanceof ItemUpgrade) {
 				if(inv[i].getItemDamage() == 0) {
@@ -329,9 +341,12 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 					hasSideControl = true;
 				} else if(inv[i].getItemDamage() == 3) {
 					increaseUpgrades += inv[i].stackSize;
+				} else if(inv[i].getItemDamage() == 4) {
+					productionSpeedUpgrades += inv[i].stackSize;
 				}
 			}
 		}
+		productionSpeedBonus = productionSpeedUpgrades;
 		maxOutput = (int)(defaultMaxOutput * (1+(increaseUpgrades * 0.1)));
 		if(!hasOutputControl){
 			for(int i = 0; i< 6; i++) {

@@ -67,6 +67,7 @@ public class TileEntityEnergyStorage extends TileEntityEnergyBase implements IIn
 			//default-Implementation need metadata form the tileentity, if nbt-tags are NOT loaded
 			for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
 		}
+		this.onInventoryChanged();
 	}
 	
 	/*

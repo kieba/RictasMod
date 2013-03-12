@@ -44,6 +44,7 @@ public class TileEntityEnergyCableSided extends TileEntityEnergyCable implements
 			for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
 			updateSides();
 		}
+		this.onInventoryChanged();
 	}
 
 	@Override
