@@ -98,6 +98,7 @@ public class ContainerGenerator extends Container {
 						stack.stackSize--;
 						neededItems--;
 					}
+					slot.onSlotChanged();
 					if(stack.stackSize == 0) {
 						return true;
 					} else {
