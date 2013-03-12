@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import rictas.core.GuiHandler;
 import rictas.core.PacketTileEntity;
+import rictas.helper.ClientServerLogger;
 import rictas.helper.ModIDs;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -191,6 +192,10 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
             	updateClientBurning();
             }
             	
+        } else {
+        	if(remainingBurnTime  <= 0) {
+        		worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
+        	}
         }
 	}
 	
@@ -343,6 +348,10 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 			inputSides = 0x00;
 		}
 		super.onInventoryChanged();
+		if(!worldObj.isRemote) {
+			worldObj.notifyBlockChange(xCoord, yCoord, zCoord, ModIDs.blockEnergyStorage);
+			sendClientUpdatePacket();
+		}
 	}
 
 	@Override

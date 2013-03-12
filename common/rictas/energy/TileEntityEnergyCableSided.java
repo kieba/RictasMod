@@ -287,6 +287,10 @@ public class TileEntityEnergyCableSided extends TileEntityEnergyCable implements
 			inputSides = 0xFF;
 		}
 		super.onInventoryChanged();
+		if(!worldObj.isRemote) {
+			worldObj.notifyBlockChange(xCoord, yCoord, zCoord, ModIDs.blockEnergyStorage);
+			sendClientUpdatePacket();
+		}
 	}
 
 	@Override

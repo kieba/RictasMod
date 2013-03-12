@@ -217,6 +217,10 @@ public class TileEntityEnergyStorage extends TileEntityEnergyBase implements IIn
 			inputSides = 0x08;
 		}
 		super.onInventoryChanged();
+		if(!worldObj.isRemote) {
+			worldObj.notifyBlockChange(xCoord, yCoord, zCoord, ModIDs.blockEnergyStorage);
+			sendClientUpdatePacket();
+		}
 	}
 
 	@Override
