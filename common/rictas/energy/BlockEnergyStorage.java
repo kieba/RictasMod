@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockEnergyStorage extends BlockContainer {
+public class BlockEnergyStorage extends BlockEnergyBase {
 	
 	public BlockEnergyStorage(int par1, Material par2Material) {
 		super(par1, par2Material);

@@ -61,6 +61,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 			for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
 		}
 		this.onInventoryChanged();
+		this.onNeighborBlockChange();
 	}
 	
 	/*
@@ -146,7 +147,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyBase implements I
 	@Override
 	protected void update() {
 		updateEnergy();
-		updateBurning();		
+		updateBurning();
 	}
 	
 	public int getMaxPossibleOutput() {

@@ -1,18 +1,18 @@
 package rictas.core;
 
 import rictas.client.GuiController;
-import rictas.client.GuiEnergyCableSided;
+import rictas.client.GuiEnergyCableAdv;
 import rictas.client.GuiEnergyGenerator;
 import rictas.client.GuiEnergyStorage;
 import rictas.client.GuiWalls;
-import rictas.energy.ContainerCableSided;
+import rictas.energy.ContainerCableAdv;
 import rictas.energy.ContainerGenerator;
 import rictas.energy.ContainerStorage;
 import rictas.energy.IGuiOutputControl;
 import rictas.energy.IGuiPriorityControl;
 import rictas.energy.IGuiSideControl;
 import rictas.energy.TileEntityEnergyCable;
-import rictas.energy.TileEntityEnergyCableSided;
+import rictas.energy.TileEntityEnergyCableAdv;
 import rictas.energy.TileEntityEnergyGenerator;
 import rictas.energy.TileEntityEnergyStorage;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,8 +43,8 @@ public class GuiHandler implements IGuiHandler {
         } else if(tileEntity instanceof TileEntityEnergyGenerator){
             ((TileEntityEnergyGenerator) tileEntity).updateClientBurning();
             return new ContainerGenerator(player.inventory, (TileEntityEnergyGenerator) tileEntity);
-        } else if(tileEntity instanceof TileEntityEnergyCableSided){
-        	return new ContainerCableSided(player.inventory, (TileEntityEnergyCableSided) tileEntity);
+        } else if(tileEntity instanceof TileEntityEnergyCableAdv){
+        	return new ContainerCableAdv(player.inventory, (TileEntityEnergyCableAdv) tileEntity);
         }
         return null;
 	}
@@ -59,8 +59,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiEnergyStorage(player.inventory, (TileEntityEnergyStorage)tileEntity);
          } else if(tileEntity instanceof TileEntityEnergyGenerator) {
         	 return new GuiEnergyGenerator(player.inventory, (TileEntityEnergyGenerator)tileEntity);
-         } else if(tileEntity instanceof TileEntityEnergyCableSided) {
-        	 return new GuiEnergyCableSided(player.inventory, (TileEntityEnergyCableSided)tileEntity);
+         } else if(tileEntity instanceof TileEntityEnergyCableAdv) {
+        	 return new GuiEnergyCableAdv(player.inventory, (TileEntityEnergyCableAdv)tileEntity);
          }
          return null;
 	}

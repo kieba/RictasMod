@@ -2,7 +2,7 @@ package rictas.client;
 
 import rictas.core.CommonProxy;
 import rictas.energy.TileEntityEnergyCable;
-import rictas.energy.TileEntityEnergyCableSided;
+import rictas.energy.TileEntityEnergyCableAdv;
 import rictas.helper.Textures;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -21,7 +21,7 @@ public class ClientProxy extends CommonProxy {
 
 	public void initTileEntities() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCable.class, new TileEntityEnergyCableRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCableSided.class, new TileEntityEnergyCableRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCableAdv.class, new TileEntityEnergyCableRenderer());
 	}
 
 	@Override

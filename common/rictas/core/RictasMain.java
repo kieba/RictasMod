@@ -2,16 +2,16 @@ package rictas.core;
 
 import rictas.energy.BlockEnergyCable;
 import rictas.energy.BlockEnergyCableDummyRender;
-import rictas.energy.BlockEnergyCableSided;
+import rictas.energy.BlockEnergyCableAdv;
 import rictas.energy.BlockEnergyGenerator;
 import rictas.energy.BlockEnergyStorage;
 import rictas.energy.ItemBlockEnergyCable;
-import rictas.energy.ItemBlockEnergyCableSided;
+import rictas.energy.ItemBlockEnergyCableAdv;
 import rictas.energy.ItemBlockEnergyStorage;
 import rictas.energy.ItemUpgrade;
 import rictas.energy.ItemWallPainter;
 import rictas.energy.TileEntityEnergyCable;
-import rictas.energy.TileEntityEnergyCableSided;
+import rictas.energy.TileEntityEnergyCableAdv;
 import rictas.energy.TileEntityEnergyGenerator;
 import rictas.energy.TileEntityEnergyStorage;
 import rictas.energy.WallLogic;
@@ -34,7 +34,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "RictasMod", name = "name", version = "xyz")
+@Mod(modid = "RictasMod", name = "name", version = "xyz"/*, dependencies = "required-after:BuildCraft|Core@3.4.3"*/)
 @NetworkMod(channels = { PacketHandler.channel }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class RictasMain {
 
@@ -43,7 +43,7 @@ public class RictasMain {
 
 	public static GuiHandler guiHandler = new GuiHandler();
 	public static final Block energyCable = new BlockEnergyCable(ModIDs.blockEnergyCable, Material.glass);
-	public static final Block energyCableSided = new BlockEnergyCableSided(ModIDs.blockEnergyCableSided, Material.glass);
+	public static final Block energyCableSided = new BlockEnergyCableAdv(ModIDs.blockEnergyCableSided, Material.glass);
 	public static final Block energyStorage = new BlockEnergyStorage(ModIDs.blockEnergyStorage, Material.rock);
 	public static final Block energyGenerator = new BlockEnergyGenerator(ModIDs.blockEnergyGenerator, Material.rock);
 	public static final BlockEnergyCableDummyRender energyCableDummyRender = new BlockEnergyCableDummyRender(ModIDs.blockEnergyCableDummy, Material.glass);
@@ -64,7 +64,7 @@ public class RictasMain {
 		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);		
 		GameRegistry.registerBlock(energyCable, ItemBlockEnergyCable.class, "Energy Cable");
 		GameRegistry.registerBlock(energyCableDummyRender, ItemBlockEnergyCable.class, "Energy Cable Dummy");
-		GameRegistry.registerBlock(energyCableSided, ItemBlockEnergyCableSided.class, "Energy Cable Sided");
+		GameRegistry.registerBlock(energyCableSided, ItemBlockEnergyCableAdv.class, "Energy Cable Sided");
 		GameRegistry.registerBlock(energyStorage, ItemBlockEnergyStorage.class, "Energy Storage");
 		GameRegistry.registerBlock(energyGenerator, "Energy Generator");
 		
@@ -72,7 +72,7 @@ public class RictasMain {
 		GameRegistry.registerItem(wallPainter, "WallPainter");
 		
 		GameRegistry.registerTileEntity(TileEntityEnergyCable.class, "tileEnergyCable");
-		GameRegistry.registerTileEntity(TileEntityEnergyCableSided.class, "tileEnergyCableSided");
+		GameRegistry.registerTileEntity(TileEntityEnergyCableAdv.class, "tileEnergyCableSided");
 		GameRegistry.registerTileEntity(TileEntityEnergyStorage.class, "tileEnergyStorage");
 		GameRegistry.registerTileEntity(TileEntityEnergyGenerator.class,"tileEnergyGenerator");
 		LanguageRegistry.addName(energyGenerator, "Energy Generator");
@@ -81,7 +81,7 @@ public class RictasMain {
 			LanguageRegistry.addName(multiBlockCable, ItemBlockEnergyCable.subNames[multiBlockCable.getItemDamage()]);
 			
 			ItemStack multiBlockCableSided = new ItemStack(energyCableSided, 1, i);
-			LanguageRegistry.addName(multiBlockCableSided, ItemBlockEnergyCableSided.subNames[multiBlockCableSided.getItemDamage()]);
+			LanguageRegistry.addName(multiBlockCableSided, ItemBlockEnergyCableAdv.subNames[multiBlockCableSided.getItemDamage()]);
 			
 			ItemStack multiBlockStorage = new ItemStack(energyStorage, 1, i);
 			LanguageRegistry.addName(multiBlockStorage, ItemBlockEnergyStorage.subNames[multiBlockStorage.getItemDamage()]);

@@ -132,4 +132,10 @@ public abstract class TileEntityBase extends TileEntity implements IPacketReceiv
 	 * after this function, the server will send an clientUpdatepacket to all clients
 	 */
 	protected abstract void metadataInit();
+	
+	
+	/**
+	 * does what the name says
+	 */
+	public abstract void onNeighborBlockChange();
 }

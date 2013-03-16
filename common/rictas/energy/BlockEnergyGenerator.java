@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockEnergyGenerator extends BlockContainer {
+public class BlockEnergyGenerator extends BlockEnergyBase {
 
 	public BlockEnergyGenerator(int par1, Material par2Material) {
 		super(par1, par2Material);

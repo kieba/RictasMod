@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import rictas.energy.TileEntityEnergyCable;
-import rictas.energy.TileEntityEnergyCableSided;
+import rictas.energy.TileEntityEnergyCableAdv;
 
 
 public class TileEntityEnergyCableRenderer extends TileEntitySpecialRenderer {
@@ -22,8 +22,8 @@ public class TileEntityEnergyCableRenderer extends TileEntitySpecialRenderer {
 	 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f) {
-		if(tileEntity instanceof TileEntityEnergyCableSided) {
-			TileEntityEnergyCableSided cableSideTile = (TileEntityEnergyCableSided) tileEntity;
+		if(tileEntity instanceof TileEntityEnergyCableAdv) {
+			TileEntityEnergyCableAdv cableSideTile = (TileEntityEnergyCableAdv) tileEntity;
 			GL11.glPushMatrix();
 			GL11.glTranslatef((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
 			int conSides = cableSideTile.getConnectedSides();

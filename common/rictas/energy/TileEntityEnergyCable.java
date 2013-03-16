@@ -39,7 +39,7 @@ public class TileEntityEnergyCable extends TileEntityEnergyBase implements IWall
 		this.maxInput = maxStorage;
 		this.maxOutput = maxStorage;
 		for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
-		updateSides();
+		onNeighborBlockChange();
 	}
 
 	@Override
@@ -51,7 +51,15 @@ public class TileEntityEnergyCable extends TileEntityEnergyBase implements IWall
 		return connectedSides;
 	}
 	
-	public void updateSides() {
+	
+	
+	@Override
+	public void onNeighborBlockChange() {
+		super.onNeighborBlockChange();
+		updateSides();
+	}
+
+	protected void updateSides() {
 		connectedSides = 0x00;
 		for(int i = 0; i<6; i++) {
 			int con = connectTo(ForgeDirection.getOrientation(i));

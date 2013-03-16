@@ -41,25 +41,30 @@ public abstract class TileEntityEnergyBase extends TileEntityBase implements IEn
 	private boolean deadEnd = false;
 	private boolean isEnergyFlowing = true;
 	
+	private TileEntity[] sideTiles = new TileEntity[6];
+
+	@Override
+	public void onNeighborBlockChange() {
+		for (int i = 0; i < sideTiles.length; i++) {
+			int x = xCoord + ForgeDirection.getOrientation(i).offsetX;
+			int y = yCoord + ForgeDirection.getOrientation(i).offsetY;
+			int z = zCoord + ForgeDirection.getOrientation(i).offsetZ;
+			sideTiles[i] = worldObj.getBlockTileEntity(x, y, z);
+		}
+	}
+
 	protected void updateEnergy() {
 		if(meassure)
 			meassureTicks++;
-		TileEntity[] tileSide = new TileEntity[6];
 		int[] inputPerSide = new int[6];
 		int[] outputPerSide = new int[6];
 		int inputAmount = 0;
 		int outputAmount = 0;
-		for (int i = 0; i < tileSide.length; i++) {
-			int x = xCoord + ForgeDirection.getOrientation(i).offsetX;
-			int y = yCoord + ForgeDirection.getOrientation(i).offsetY;
-			int z = zCoord + ForgeDirection.getOrientation(i).offsetZ;
-			tileSide[i] = worldObj.getBlockTileEntity(x, y, z);
-		}
-		for (int i = 0; i < tileSide.length; i++) {
+		for (int i = 0; i < sideTiles.length; i++) {
 			if (((blockedSides >> i) & 0x01) == 0x01 || ((outputSides >> i) & 0x01) == 0x00)
 				continue;
-			if (tileSide[i] instanceof IEnergyReceiver) {
-				int o1 = ((IEnergyReceiver) tileSide[i]).maxInput(invertSide(i));
+			if (sideTiles[i] instanceof IEnergyReceiver) {
+				int o1 = ((IEnergyReceiver) sideTiles[i]).maxInput(invertSide(i));
 				int o2 = this.maxOutput(ForgeDirection.getOrientation(i));
 				outputPerSide[i] = o1 > o2 ? o2 : o1;
 				outputAmount += outputPerSide[i];
@@ -108,9 +113,9 @@ public abstract class TileEntityEnergyBase extends TileEntityBase implements IEn
 					maxCurrentOutput -= totalOutputPerPrio[prio];
 				}
 				for (Integer i : tiles.get(prio)) {
-					if (tileSide[i] != null) {
+					if (sideTiles[i] != null) {
 						outputPerSide[i] = (int) (outputPerSide[i] * percent);
-						((IEnergyReceiver) tileSide[i]).receiveEnergy(outputPerSide[i], invertSide(i));
+						((IEnergyReceiver) sideTiles[i]).receiveEnergy(outputPerSide[i], invertSide(i));
 						transmittEnergy(outputPerSide[i],ForgeDirection.getOrientation(i));
 					}
 				}
@@ -139,7 +144,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase implements IEn
 			*/
 			
 		}
-		deadEnd = checkDeadEnd(tileSide);
+		deadEnd = checkDeadEnd(sideTiles);
 		if (storage < 0) {
 			storage = 0;
 		}

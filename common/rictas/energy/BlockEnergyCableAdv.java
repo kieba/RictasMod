@@ -22,9 +22,9 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockEnergyCableSided extends BlockContainer {
+public class BlockEnergyCableAdv extends BlockEnergyBase {
 
-	public BlockEnergyCableSided(int par1, Material par2Material) {
+	public BlockEnergyCableAdv(int par1, Material par2Material) {
 		super(par1, par2Material);
 		this.setHardness(0.5F);
 		this.setCreativeTab(CreativeTabs.tabBlock);
@@ -138,7 +138,7 @@ public class BlockEnergyCableSided extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
-		return new TileEntityEnergyCableSided();
+		return new TileEntityEnergyCableAdv();
 	}
 
 	@Override
@@ -149,19 +149,10 @@ public class BlockEnergyCableSided extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3,
-			int par4, int par5) {
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		TileEntityEnergyCableSided tile = (TileEntityEnergyCableSided)par1World.getBlockTileEntity(par2, par3, par4);
-		tile.updateSides();
-		tile.sendClientUpdatePacket();
-	}
-
-	@Override
 	public void onBlockClicked(World par1World, int par2, int par3, int par4,
 			EntityPlayer par5EntityPlayer) {
 		super.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
-		TileEntityEnergyCableSided tile = (TileEntityEnergyCableSided)par1World.getBlockTileEntity(par2, par3, par4);
+		TileEntityEnergyCableAdv tile = (TileEntityEnergyCableAdv)par1World.getBlockTileEntity(par2, par3, par4);
 		if(tile.meassure) 
 			ClientServerLogger.addLog(tile.stopMeassure());
 		else

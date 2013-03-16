@@ -15,7 +15,7 @@ import com.google.common.io.ByteArrayDataInput;
 
 import cpw.mods.fml.common.network.Player;
 
-public class TileEntityEnergyCableSided extends TileEntityEnergyCable implements IInventory, IGuiFullControl {
+public class TileEntityEnergyCableAdv extends TileEntityEnergyCable implements IInventory, IGuiFullControl {
 	
     /*
     Bit[0] = DOWN(0, -1, 0), 
@@ -30,19 +30,20 @@ public class TileEntityEnergyCableSided extends TileEntityEnergyCable implements
 	private boolean hasSideControl;
 	private boolean hasPrioControl;
 	
-	public TileEntityEnergyCableSided() {
+	public TileEntityEnergyCableAdv() {
 		outputSides = 0xFF;
 		inputSides = 0xFF;
 	}
 
 	@Override
 	protected void metadataInit() {
+		super.metadataInit();
 		maxStorage = maxCapacity[this.getBlockMetadata()];
 		this.maxInput = maxStorage;
 		this.maxOutput = maxStorage;
 		if(!this.isNbtLoaded()) {
 			for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
-			updateSides();
+			onNeighborBlockChange();
 		}
 		this.onInventoryChanged();
 	}
@@ -254,7 +255,6 @@ public class TileEntityEnergyCableSided extends TileEntityEnergyCable implements
 	
 	@Override
 	public void onInventoryChanged() {
-		ClientServerLogger.addLog("onInventoryChanged");
 		hasOutputControl = false;
 		hasPrioControl = false;
 		hasSideControl = false;

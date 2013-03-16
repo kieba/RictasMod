@@ -4,17 +4,17 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.opengl.GL11;
 
-import rictas.energy.ContainerCableSided;
-import rictas.energy.TileEntityEnergyCableSided;
+import rictas.energy.ContainerCableAdv;
+import rictas.energy.TileEntityEnergyCableAdv;
 import rictas.helper.Textures;
 
 
-public class GuiEnergyCableSided extends GuiController {
+public class GuiEnergyCableAdv extends GuiController {
 
-	private TileEntityEnergyCableSided tile;
+	private TileEntityEnergyCableAdv tile;
 
-	public GuiEnergyCableSided(InventoryPlayer inventoryPlayer, TileEntityEnergyCableSided tile) {
-		super(new ContainerCableSided(inventoryPlayer, tile),tile,117,-11);
+	public GuiEnergyCableAdv(InventoryPlayer inventoryPlayer, TileEntityEnergyCableAdv tile) {
+		super(new ContainerCableAdv(inventoryPlayer, tile),tile,117,-11);
 		this.tile = tile;
 		//sideControl.getTile().requestClientUpdate();
 	}

@@ -4,10 +4,6 @@ package rictas.energy;
 
 import java.util.List;
 
-import rictas.core.CommonProxy;
-import rictas.helper.ClientServerLogger;
-import rictas.helper.Textures;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,10 +13,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import rictas.core.CommonProxy;
+import rictas.core.TileEntityBase;
+import rictas.helper.ClientServerLogger;
+import rictas.helper.Textures;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockEnergyCable extends BlockContainer {
+public class BlockEnergyCable extends BlockEnergyBase {
 
 	public BlockEnergyCable(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -150,14 +150,6 @@ public class BlockEnergyCable extends BlockContainer {
 		super.breakBlock(par1World, par2, par3, par4, id, meta);
 	}
 
-	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3,
-			int par4, int par5) {
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		TileEntityEnergyCable tile = (TileEntityEnergyCable)par1World.getBlockTileEntity(par2, par3, par4);
-		tile.updateSides();
-		tile.sendClientUpdatePacket();
-	}
 
 	@Override
 	public void onBlockClicked(World par1World, int par2, int par3, int par4,

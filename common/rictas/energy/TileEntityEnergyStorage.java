@@ -68,6 +68,7 @@ public class TileEntityEnergyStorage extends TileEntityEnergyBase implements IIn
 			for(int i = 0; i< 6; i++) maxOutputPerSide[i] = maxOutput;
 		}
 		this.onInventoryChanged();
+		onNeighborBlockChange();
 	}
 	
 	/*

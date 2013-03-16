@@ -9,12 +9,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockEnergyCableSided extends ItemBlock {
+public class ItemBlockEnergyCableAdv extends ItemBlock {
 	
 	public final static String[] subNames = {"Energy Cable Sided V1","Energy Cable Sided V2","Energy Cable Sided V3","Energy Cable Sided V4"};
 	
 
-	public ItemBlockEnergyCableSided(int id) {
+	public ItemBlockEnergyCableAdv(int id) {
 		super(id);
 		setHasSubtypes(true);
 		this.setItemName("Energy Cable Sided");

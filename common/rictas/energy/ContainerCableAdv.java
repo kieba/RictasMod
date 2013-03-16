@@ -6,12 +6,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCableSided extends Container {
+public class ContainerCableAdv extends Container {
 
-	private TileEntityEnergyCableSided tile;
+	private TileEntityEnergyCableAdv tile;
 	private boolean[] allowedUpgrades = new boolean[ItemUpgrade.subNames.length];
 
-	public ContainerCableSided(InventoryPlayer inventoryPlayer, TileEntityEnergyCableSided tile) {
+	public ContainerCableAdv(InventoryPlayer inventoryPlayer, TileEntityEnergyCableAdv tile) {
 		this.tile = tile;
 		int upgrades = 0x0F;
         for(int i = 0; i < this.allowedUpgrades.length; i++) {
